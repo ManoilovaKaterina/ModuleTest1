@@ -5,6 +5,8 @@ from Main import GetDiff
 # def getFiles():
 
 
-@pytest.mark.parametrize("one, two", [([1, 1], [1, 2])])
-def test_diff(one, two):
-    assert GetDiff(one, two) == [2]
+@pytest.mark.parametrize("one, two,  exp", [([1, 1], [1, 2], [2]),
+                                            ([1, 1], [1, 1],  []),
+                                            ([1, 2], [3, 4], [1, 2, 3, 4])])
+def test_diff(one, two, exp):
+    assert GetDiff(one, two) == exp
