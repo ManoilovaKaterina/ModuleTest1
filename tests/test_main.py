@@ -35,3 +35,10 @@ def test_diff_file(getReadFiles, getWriteFiles, diff):
     GetDiffFile(getReadFiles[0], getReadFiles[1])
     with open(getWriteFiles[0]) as difftest:
         assert difftest.readline().strip('\n') == diff
+
+
+@pytest.mark.parametrize("same", [("text text text. one text.")])
+def test_same_file(getReadFiles, getWriteFiles, same):
+    GetSameFile(getReadFiles[0], getReadFiles[1])
+    with open(getWriteFiles[1]) as sametest:
+        assert sametest.readline().strip('\n') == same
