@@ -1,5 +1,5 @@
 import pytest
-from Main import GetDiff, GetSame
+from Main import GetDiff, GetSame, GetSameFile, GetDiffFile
 
 
 @pytest.fixture()
@@ -28,3 +28,10 @@ def test_diff(one, two, exp):
                                            ([1, 2], [3, 4], [])])
 def test_same(one, two, exp):
     assert GetSame(one, two) == exp
+
+
+@pytest.mark.parametrize("diff", [("text text text. diffdiff text.")])
+def test_diff_file(getReadFiles, getWriteFiles, diff):
+    GetDiffFile(getReadFiles[0], getReadFiles[1])
+    with open(getWriteFiles[0]) as difftest:
+        assert difftest.readline().strip('\n') == diff
