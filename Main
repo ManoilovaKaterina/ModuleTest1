@@ -1,11 +1,24 @@
-def GetDiff(file1, file2):
-    result = list(set(file1) ^ set(file2))
-    f = open("diff.txt", "w")
-    for el in result:
-        f.write(el+"\n")
-    f.close()
-    return result
+def GetDiff(path1, path2):
+    with open(path1) as file1, open(path2) as file2:
+        diff = list(set(file1) ^ set(file2))
+        f = open("write_files/diff.txt", "w")
+        for el in diff:
+            f.write(el+"\n")
+        f.close()
+        return diff
+
+def GetSame(path1, path2):
+    with open(path1) as file1, open(path2) as file2:
+        same = list(set(file1).intersection(file2))
+        f = open("write_files/same.txt", "w")
+        for el in same:
+            f.write(el+"\n")
+        f.close()
+        return same
 
 
-with open('file1.txt') as file_1, open('file2.txt') as file_2:
-    print(GetDiff(file_1, file_2))
+if __name__ == "__main__":
+    path1 = 'read_files/file1.txt'
+    path2 = 'read_files/file2.txt'
+    print(GetSame(path1, path2))
+    print(GetDiff(path1, path2))
