@@ -1,19 +1,21 @@
+def WriteFile(lines, path):
+    f = open(path, "w")
+    for el in lines:
+        f.write(el+"\n")
+    f.close()
+
+
 def GetDiff(path1, path2):
     with open(path1) as file1, open(path2) as file2:
         diff = list(set(file1) ^ set(file2))
-        f = open("write_files/diff.txt", "w")
-        for el in diff:
-            f.write(el+"\n")
-        f.close()
+        WriteFile(diff, "write_files/diff.txt")
         return diff
+
 
 def GetSame(path1, path2):
     with open(path1) as file1, open(path2) as file2:
         same = list(set(file1).intersection(file2))
-        f = open("write_files/same.txt", "w")
-        for el in same:
-            f.write(el+"\n")
-        f.close()
+        WriteFile(same, "write_files/same.txt")
         return same
 
 
