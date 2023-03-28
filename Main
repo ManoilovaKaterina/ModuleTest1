@@ -1,0 +1,11 @@
+def GetDiff(file1, file2):
+    result = list(set(file1) ^ set(file2))
+    f = open("diff.txt", "w")
+    for el in result:
+        f.write(el+"\n")
+    f.close()
+    return result
+
+
+with open('file1.txt') as file_1, open('file2.txt') as file_2:
+    print(GetDiff(file_1, file_2))
